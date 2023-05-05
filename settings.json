@@ -1,0 +1,8 @@
+{
+    "mode_time_limit": [500,2000],
+    "turn_size_on_wall_follow": 0.01745329251,
+    "max_turn_steps": 360,
+    "spiral_angle_init": 0.17453292519,
+    "spiral_angle_ratio": 0.995,
+    "use_random_direction_mode": true
+}

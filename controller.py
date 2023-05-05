@@ -1,8 +1,10 @@
+import click
 import matplotlib.pyplot
 
 from simulator import run_simulation
 
 from helper_functions import *
+import json
 
 #ROOM_POLYGON = [(0,0),(640,0),(640,480),(0,480)]
 #ROOM_POLYGON = [(0,0),(640,0),(640,480),(320,480),(320,240),(0,240)]
@@ -21,7 +23,11 @@ MIN_COVERAGE_TO_EXIT = 0.988
 MAX_NO_GAIN_STEPS = 3000
 
 
-def main():
+@click.command()
+@click.option('--settings', default='settings.json', help='Path to settings file', type=str)
+def main(settings):
+    with open(settings) as fh:
+        settings = json.load(fh)
 
     robot_params = {"ROBOT_SIZE":ROOMBA_SIZE,
                     "HEAD_SIZE":1.9,
@@ -32,7 +38,7 @@ def main():
                        "MAX_NO_GAIN_STEPS":MAX_NO_GAIN_STEPS,
                        "MAX_TIME":9000}
 
-    stats = run_simulation(robot_params, room_params,
+    stats = run_simulation(robot_params, room_params, settings,
                            stop_conditions, visual_feedback=True)
 
     matplotlib.pyplot.plot(stats)

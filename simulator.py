@@ -9,7 +9,7 @@ import arena_view
 import roomba_model
 
 
-def run_simulation(robot_params={}, room_params={}, stop_conditions={}, visual_feedback=True, draw_final_result=True):
+def run_simulation(robot_params={}, room_params={}, settings={}, stop_conditions={}, visual_feedback=True, draw_final_result=True):
     stats = []
 
     room_polygon = room_params["ROOM_POLYGON"]
@@ -31,7 +31,7 @@ def run_simulation(robot_params={}, room_params={}, stop_conditions={}, visual_f
         while not room_model.is_good_start_point((start_x,start_y),robot_size):
             start_x,start_y=random.randint(0,max_x),random.randint(0,max_y)
         direction = random.randint(0,360)*math.pi/180.
-    roomba = roomba_model.RoombaModel((start_x,start_y), robot_size, robot_params["HEAD_SIZE"],
+    roomba = roomba_model.RoombaModel(settings, (start_x,start_y), robot_size, robot_params["HEAD_SIZE"],
                                       direction, robot_params["SPEED"], room_model)
 
     done = False
